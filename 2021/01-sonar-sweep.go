@@ -7,14 +7,33 @@ package advent2021
 	https://adventofcode.com/2021/day/1
 */
 func SonarSweep(m []int) int {
-	deviations := 0
+	d := 0
 
-	// index 0 skipped, nothing to compare to
 	for i := 1; i < len(m); i++ {
 		if m[i] > m[i-1] {
-			deviations += 1
+			d += 1
 		}
 	}
 
-	return deviations
+	return d
+}
+
+/*
+	SonarSweepWindow measures a window of three values and records
+	deviations between previous windows
+*/
+func SonarSweepWindow(m []int) int {
+	d := 0
+	prevSum := m[0] + m[1] + m[2]
+
+	for i := 3; i < len(m); i++ {
+		currSum := m[i] + m[i-1] + m[i-2]
+		if currSum > prevSum {
+			d += 1
+		}
+
+		prevSum = currSum
+	}
+
+	return d
 }
