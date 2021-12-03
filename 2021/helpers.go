@@ -43,3 +43,10 @@ func ParseToNumSlice(i string) []int {
 
 	return nums
 }
+
+func ParseToStringSlice(i string) []string {
+	splits := strings.Split(i, "\n")
+
+	splits = splits[:len(splits)-1]
+	return splits
+}
