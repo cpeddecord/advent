@@ -1,7 +1,6 @@
 package advent2021
 
 import (
-	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
@@ -111,58 +110,63 @@ func PlayBingo(i []int, boards []BingoBoard) int {
 }
 
 func LetTheSquidWin(i []int, boards []BingoBoard) int {
-	lastBoard := boards[0]
-	unmarkedSums := 0
-	boardsWithoutBingo := len(boards)
-	idx := 0
+	// lastBoard := boards[0]
+	// unmarkedSums := 0
+	// boardsWithoutBingo := len(boards)
+	// idx := 0
 
-	for boardsWithoutBingo != 0 {
-		fmt.Println(i[idx])
-		for _, b := range boards {
-			b.addNum(i[idx])
-
-			if b.hasBingo {
-				lastBoard = b
-				boardsWithoutBingo--
-				idx--
-			}
-		}
-
-		idx++
-	}
-
-	for k := range lastBoard.coords {
-		if lastBoard.numState[k] {
-			continue
-		}
-
-		unmarkedSums += k
-	}
-
-	// for _, v := range i {
-	// 	if boardsWithoutBingo == 0 {
-	// 		break
-	// 	}
-
+	// for boardsWithoutBingo != 0 {
+	// 	fmt.Println(i[idx])
 	// 	for _, b := range boards {
-	// 		b.addNum(v)
+	// 		b.addNum(i[idx])
 
 	// 		if b.hasBingo {
+	// 			lastBoard = b
 	// 			boardsWithoutBingo--
-
-	// 			if boardsWithoutBingo == 0 {
-	// 				winningNum = v
-	// 				for k := range b.coords {
-	// 					if b.numState[k] {
-	// 						continue
-	// 					}
-
-	// 					unmarkedSums += k
-	// 				}
-	// 			}
+	// 			idx--
 	// 		}
 	// 	}
+
+	// 	idx++
 	// }
 
-	return unmarkedSums * i[idx]
+	// for k := range lastBoard.coords {
+	// 	if lastBoard.numState[k] {
+	// 		continue
+	// 	}
+
+	// 	unmarkedSums += k
+	// }
+	// 	return unmarkedSums * i[idx]
+
+	boardsWithoutBingo := 0
+	winningNum := 0
+	unmarkedSums := 0
+
+	for _, v := range i {
+		if boardsWithoutBingo == 0 {
+			break
+		}
+
+		for _, b := range boards {
+			b.addNum(v)
+
+			if b.hasBingo {
+				boardsWithoutBingo--
+
+				if boardsWithoutBingo == 0 {
+					winningNum = v
+					for k := range b.coords {
+						if b.numState[k] {
+							continue
+						}
+
+						unmarkedSums += k
+					}
+				}
+			}
+		}
+	}
+
+	return winningNum * unmarkedSums
 }
