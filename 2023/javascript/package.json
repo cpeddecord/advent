@@ -1,0 +1,12 @@
+{
+  "name": "advent-2023-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "vitest": "^0.34.6"
+  },
+  "scripts": {
+    "test": "vitest"
+  }
+}
