@@ -39,7 +39,7 @@ func GetInputByDay(input GetInputParams) (error, string) {
 	client := &http.Client{}
 
 	n, _ := strconv.Atoi(input.day)
-	url := "https://adventofcode.com/2023/day/" + strconv.Itoa(n) + "/input"
+	url := "https://adventofcode.com/2024/day/" + strconv.Itoa(n) + "/input"
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
